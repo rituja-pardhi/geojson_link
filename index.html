@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <title>Points on a Map</title>
+    <style>
+        body { 
+          margin: 0; 
+          padding: 0; 
+        }
+        #map { 
+          position: absolute; 
+          top: 0; 
+          bottom: 0; 
+          width: 100%; 
+        }
+      </style>
+      
+</head>
+<body>
+    <div id='map'></div>
+    
+
+    <script>
+       mapboxgl.accessToken = 'pk.eyJ1Ijoicml0dWphLXBhcmRoaSIsImEiOiJjbGF0dWx4dTkwMDV1M3ByenRnanI2MXZ2In0.4uYvAokvPh7JfDYs54jsqg';
+        const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/light-v11', // style URL
+        center: [9, 50],
+      zoom: 5
+    });
+    map.on('load', () => {
+        // Add a GeoJSON source containing place coordinates and information.
+        map.addSource('new', {
+            'type': 'geojson',
+            'data': 'data/borough.geojson'
+        });
+    
+        map.addLayer({
+                        'id': 'layerID',
+                        'type': 'fill',
+                        'source': 'new',
+                        'layout': {
+                        },
+                        "paint": {
+                          "fill-color": "#FF0000"
+                        },
+                        
+                    });
+    });
+    </script>
+   
+    
+</body>
+</html>
